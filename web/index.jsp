@@ -23,8 +23,8 @@
         <th>Serial No.</th>
         <th>ID</th>
         <th>Name</th>
-        <th>Phone</th>
         <th>Email</th>
+        <th>Country</th>
         <th></th>
     </tr>
     </thead>
