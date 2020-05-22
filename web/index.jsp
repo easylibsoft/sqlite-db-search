@@ -38,7 +38,8 @@
         String newName = request.getParameter("name");
         String newMail = request.getParameter("email");
         String newTry = request.getParameter("country");
-        String add = request.getParameter("add");
+        String addd = request.getParameter("add");
+
         if(newName != null && newMail != null && newTry != null){
             int rs3 = stat.executeUpdate("update data set name = '"+newName+"', email = '"+newMail+"', country = '"+newTry+"' where id == '" + idNum + "';");
             request.setAttribute("name",null);
@@ -69,7 +70,7 @@
                 rs1.close();
         }
 
-        if(add.equals("true")){
+        if(addd != null){
             out.print("<div id=\"id01\" class=\"w3-modal\" style =\"display:block;\">\n" +
                     "<div class=\"w3-modal-content\">\n" +
                     "<div class=\"w3-container\">\n" +
@@ -80,7 +81,7 @@
                     "<p><input name = \"nnname\" type = \"text\" placeholder = \"Name\"></p>\n" +
                     "<p><input name = \"nnemail\" type = \"text\" placeholder = \"Email\"></p>\n" +
                     "<p><input name = \"nncountry\" type = \"text\" placeholder = \"Country\"></p>\n" +
-                    "<p><input type = \"nnsubmit\" onclick=\"document.getElementById('id01').style.display='none'\" value = \"Edit\"></p>\n" +
+                    "<p><input type = \"submit\" onclick=\"document.getElementById('id01').style.display='none'\" value = \"Add\"></p>\n" +
                     "</form>\n" +
                     "</div>\n" +
                     "</div>\n" +
@@ -98,6 +99,7 @@
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         if(nId != null && nName != null && nEmail != null && nCountry != null){
             int rs4 = stat.executeUpdate("insert into data(id,name,email,country) values ('"+nId+"','"+nName+"','"+nEmail+"','"+nCountry+"')");
         }
