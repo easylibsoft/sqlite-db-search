@@ -4,6 +4,7 @@ Requires TomEE 9 or Tomcat 9, and a minimum of Java 8 to run
 
 
 ### Run
+* Forke and clone this repository
 * Copy the contents of the `web` folder
 * Paste them into a folder inside $TOMEE/webapps
 * Visit `localhost:8080/<directory_name>`
