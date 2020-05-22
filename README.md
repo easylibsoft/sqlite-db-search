@@ -1,8 +1,10 @@
 # sqlite-db-search
-A JSP Web Application that allows you to insert records, edit records and search through records in an SQLite Database Table 
-Requires TomEE 9  
+A JSP Web Application that allows you to insert records, edit records and search through records in an SQLite Database Table made using Java EE.  
+Requires TomEE 9 or Tomcat 9, and a minimum of Java 8 to run  
+
 
 ### Run
+* Forke and clone this repository
 * Copy the contents of the `web` folder
 * Paste them into a folder inside $TOMEE/webapps
 * Visit `localhost:8080/<directory_name>`
@@ -17,4 +19,5 @@ Requires TomEE 9
 * Visit `localhost:8080/<directory_name>`
 
 ### License
-Licensed under the MIT License
+Licensed under the MIT License  
+
