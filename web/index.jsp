@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.sql.Connection"%>
-<%@ page import="java.sql.DriverManager"%>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.*" %>
 <html>
   <head>
     <title>Database Project</title>
@@ -33,26 +30,46 @@
     </thead>
     <tbody>
     <%
-        String idNum = request.getParameter("id");
-        if(idNum != null){
-            out.print("<div id=\"id01\" class=\"w3-modal\" style =\"display:block;\">\n" +
-                    "    <div class=\"w3-modal-content\">\n" +
-                    "      <div class=\"w3-container\">\n" +
-                    "        <span onclick=\"document.getElementById('id01').style.display='none'\" class=\"w3-button w3-display-topright\">&times;</span>\n" +
-                    "        <p>Edit</p>\n" +
-                    "        <p><input type = \"text\"></p>\n" +
-                    "      </div>\n" +
-                    "    </div>\n" +
-                    "  </div>\n" +
-                    "</div>");
-        }
-        String phrase = request.getParameter("srch");
         Class.forName("org.sqlite.JDBC");
-        Connection conn =
-                DriverManager.getConnection("jdbc:sqlite:" + request.getRealPath("/") + "main.sqlite");
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:" + request.getRealPath("/") + "main.sqlite");
         Statement stat = conn.createStatement();
 
-        ResultSet rs = stat.executeQuery("select * from data;");
+        ResultSet rs,rs1;
+        String idNum = request.getParameter("id");
+        String newName = request.getParameter("name");
+        String newMail = request.getParameter("email");
+        String newTry = request.getParameter("country");
+        if(newName != null && newMail != null && newTry != null){
+            int rs3 = stat.executeUpdate("update data set name = '"+newName+"', email = '"+newMail+"', country = '"+newTry+"' where id == '" + idNum + "';");
+            request.setAttribute("name",null);
+            request.setAttribute("email",null);
+            request.setAttribute("country",null);
+            request.removeAttribute("name");
+            request.removeAttribute("email");
+            request.removeAttribute("country");
+        }
+        if(idNum != null){
+            rs1 = stat.executeQuery("select * from data where id == '"+idNum +"';");
+                out.print("<div id=\"id01\" class=\"w3-modal\" style =\"display:block;\">\n" +
+                        "<div class=\"w3-modal-content\">\n" +
+                        "<div class=\"w3-container\">\n" +
+                        "<form>\n" +
+                        "<span onclick=\"document.getElementById('id01').style.display='none'\" class=\"w3-button w3-display-topright\">&times;</span>\n" +
+                        "<p>Edit</p>\n" +
+                        "<p><input type = \"text\" readonly value = \""+rs1.getString("serial")+"\"></p>\n" +
+                        "<p><input type = \"text\" name = \"id\" readonly value = \""+rs1.getString("id")+"\"></p>\n" +
+                        "<p><input name = \"name\" type = \"text\" placeholder = \"Name\" value = \""+rs1.getString("name")+"\"></p>\n" +
+                        "<p><input name = \"email\" type = \"text\" placeholder = \"Email\"value = \""+rs1.getString("email")+"\"></p>\n" +
+                        "<p><input name = \"country\" type = \"text\" placeholder = \"Country\"value = \""+rs1.getString("country")+"\"></p>\n" +
+                        "<p><input type = \"submit\" onclick=\"document.getElementById('id01').style.display='none'\" value = \"Edit\"></p>\n" +
+                        "</form>\n" +
+                        "</div>\n" +
+                        "</div>\n" +
+                        "</div>");
+                rs1.close();
+        }
+        String phrase = request.getParameter("srch");
+        rs = stat.executeQuery("select * from data;");
         if(phrase != null){
           rs = stat.executeQuery("select * from data where instr(name, '"+phrase+"') > 0;");
         }
@@ -62,8 +79,8 @@
             out.println("<td>" + rs.getString("serial") + "</td>");
             out.println("<td><input type=\"text\" readonly name = \"id\"value=\"" + rs.getString("id") + "\"></td>");
             out.println("<td>" + rs.getString("name") + "</td>");
-            out.println("<td>" + rs.getString("phone") + "</td>");
             out.println("<td>" + rs.getString("email") + "</td>");
+            out.println("<td>" + rs.getString("country") + "</td>");
             out.println("<td><input type = \"submit\" value=\"Edit\"></td>");
             out.println("</tr>");
             out.println("</form>");
