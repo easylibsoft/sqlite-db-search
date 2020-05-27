@@ -54,7 +54,7 @@
                 out.print("<div id=\"id01\" class=\"w3-modal\" style =\"display:block;\">\n" +
                         "<div class=\"w3-modal-content\">\n" +
                         "<div class=\"w3-container\">\n" +
-                        "<form>\n" +
+                        "<form method=\"post\">\n" +
                         "<span onclick=\"document.getElementById('id01').style.display='none'\" class=\"w3-button w3-display-topright\">&times;</span>\n" +
                         "<p>Edit</p>\n" +
                         "<p><input type = \"text\" readonly value = \""+rs1.getString("serial")+"\"></p>\n" +
@@ -74,7 +74,7 @@
             out.print("<div id=\"id01\" class=\"w3-modal\" style =\"display:block;\">\n" +
                     "<div class=\"w3-modal-content\">\n" +
                     "<div class=\"w3-container\">\n" +
-                    "<form>\n" +
+                    "<form method=\"post\">\n" +
                     "<span onclick=\"document.getElementById('id01').style.display='none'\" class=\"w3-button w3-display-topright\">&times;</span>\n" +
                     "<p>Edit</p>\n" +
                     "<p><input type = \"text\" name = \"nnid\" placeholder = \"ID\"></p>\n" +
@@ -110,7 +110,7 @@
           rs = stat.executeQuery("select * from data where instr(name, '"+phrase+"') > 0;");
         }
         while (rs.next()) {
-            out.println("<form>");
+            out.println("<form method=\"post\">");
             out.println("<tr>");
             out.println("<td>" + rs.getString("serial") + "</td>");
             out.println("<td><input type=\"text\" readonly name = \"id\"value=\"" + rs.getString("id") + "\"></td>");
@@ -127,7 +127,7 @@
     </tbody>
   </table>
   <fieldset class = "w3-border-0">
-      <form>
+      <form method="post">
           <input type="text" style="display:none;" name = "add" value = "true">
           <input type="submit" class = "w3-button w3-border-black w3-green w3-hover-light-green w3-border-light-green" value="Insert new Record">
       </form>
