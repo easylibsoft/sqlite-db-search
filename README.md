@@ -19,7 +19,7 @@ Requires TomEE 9 or Tomcat 9, and a minimum of Java 8 to run
 * Visit `localhost:8080/<directory_name>`
 
 ### Contributing
-Refer to CONTRIBUTING.md
+Refer to [CONTRIBUTING.md](https://github.com/easylibsoft/sqlite-db-search/blob/master/CONTRIBUTING.md)
 
 ### License
 Licensed under the MIT License  
