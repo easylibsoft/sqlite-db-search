@@ -18,6 +18,9 @@ Requires TomEE 9 or Tomcat 9, and a minimum of Java 8 to run
 * Run $TOMEE/bin/starup.sh
 * Visit `localhost:8080/<directory_name>`
 
+### Contributing
+Refer to CONTRIBUTING.md
+
 ### License
 Licensed under the MIT License  
 
