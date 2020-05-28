@@ -21,6 +21,9 @@ Requires TomEE 9 or Tomcat 9, and a minimum of Java 8 to run
 ### Contributing
 Refer to [CONTRIBUTING.md](https://github.com/easylibsoft/sqlite-db-search/blob/master/CONTRIBUTING.md)
 
+### Code of Conduct
+Refer to [CODE_OF_CONDUCT.md](https://github.com/easylibsoft/sqlite-db-search/blob/master/CODE_OF_CONDUCT.md)
+
 ### License
 Licensed under the MIT License  
 
