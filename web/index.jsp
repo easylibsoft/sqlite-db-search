@@ -2,13 +2,12 @@
 <%@ page import="java.sql.*" %>
 <html>
   <head>
-    <title>Database Project</title>
+    <title>Database Dashboard</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   </head>
-  <body>
-  <h1 class="w3-bar w3-black">Database Project</h1>
-  <h4>Project Directory : <%out.print(request.getContextPath());%></h4>
-  <h4>Real Directory : <%out.print(request.getRealPath("/"));%></h4><br>
+  <body style="padding: 10px">
+  <h1 class="w3-bar w3-black">Database Dashboard</h1>
+  <h4>Project Directory : $TOMEE/<%out.print(request.getContextPath());%></h4>
   <br>
   <form>
   <fieldset class = "w3-border">
@@ -132,5 +131,6 @@
           <input type="submit" class = "w3-button w3-border-black w3-green w3-hover-light-green w3-border-light-green" value="Insert new Record">
       </form>
   </fieldset>
+  <h6>Made using JavaServer Pages and SQlite</h6>
   </body>
 </html>
