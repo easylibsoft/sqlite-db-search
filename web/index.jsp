@@ -5,9 +5,9 @@
     <title>Database Dashboard</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   </head>
-  <body style="padding: 10px">
+  <body style="padding: 3px">
   <h1 class="w3-bar w3-black">Database Dashboard</h1>
-  <h4>Project Directory : $TOMEE/<%out.print(request.getContextPath());%></h4>
+  <h4>Project Directory : $TOMEE<%out.print(request.getContextPath());%></h4>
   <br>
   <form>
   <fieldset class = "w3-border">
@@ -29,16 +29,22 @@
     </thead>
     <tbody>
     <%
+        /* This Block of code handles all the behaviour.
+         * Currently, this supports editing records and adding records.
+         */
         Class.forName("org.sqlite.JDBC");
         Connection conn = DriverManager.getConnection("jdbc:sqlite:" + request.getRealPath("/") + "main.sqlite");
         Statement stat = conn.createStatement();
         ResultSet rs,rs1;
+
+        // 1. These variables are parameters, which are sent by a POST request
         String idNum = request.getParameter("id");
         String newName = request.getParameter("name");
         String newMail = request.getParameter("email");
         String newTry = request.getParameter("country");
         String addd = request.getParameter("add");
 
+        // 2. This block of code executes when a record is edited
         if(newName != null && newMail != null && newTry != null){
             int rs3 = stat.executeUpdate("update data set name = '"+newName+"', email = '"+newMail+"', country = '"+newTry+"' where id == '" + idNum + "';");
             request.setAttribute("name",null);
@@ -48,6 +54,8 @@
             request.removeAttribute("email");
             request.removeAttribute("country");
         }
+
+        // 3. This block of code executes when the user clicks on the Edit button of any record
         if(idNum != null){
                 rs1 = stat.executeQuery("select * from data where id == '"+idNum +"';");
                 out.print("<div id=\"id01\" class=\"w3-modal\" style =\"display:block;\">\n" +
@@ -69,6 +77,7 @@
                 rs1.close();
         }
 
+        // 4. This block of code executes when a user clicks on the Insert record button
         if(addd != null){
             out.print("<div id=\"id01\" class=\"w3-modal\" style =\"display:block;\">\n" +
                     "<div class=\"w3-modal-content\">\n" +
@@ -86,6 +95,8 @@
                     "</div>\n" +
                     "</div>");
         }
+
+        // 5. These variables are parameters, which are initialized in a try...catch block
         String nId = null;
         String nName = null;
         String nEmail = null;
@@ -99,15 +110,19 @@
             e.printStackTrace();
         }
 
+        // 6. This block of code executes when these four parameters (see comment 5) are not null
         if(nId != null && nName != null && nEmail != null && nCountry != null){
             int rs4 = stat.executeUpdate("insert into data(id,name,email,country) values ('"+nId+"','"+nName+"','"+nEmail+"','"+nCountry+"')");
         }
 
+        // 7. Everytime the page loads, this block of code checks whether something has been searched, and queries the table accordingly
         String phrase = request.getParameter("srch");
         rs = stat.executeQuery("select * from data;");
         if(phrase != null){
           rs = stat.executeQuery("select * from data where instr(name, '"+phrase+"') > 0;");
         }
+
+        // 8. This block of code displays an html table containing all data, or just data containing the search string
         while (rs.next()) {
             out.println("<form method=\"post\">");
             out.println("<tr>");
@@ -120,6 +135,8 @@
             out.println("</tr>");
             out.println("</form>");
         }
+
+        // 9. The connection closes when all execution finishes
         rs.close();
         conn.close();
     %>
